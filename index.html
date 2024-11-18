@@ -62,6 +62,15 @@ async function activateXR() {
   const referenceSpace = await session.requestReferenceSpace('local');
   const viewerSpace = await session.requestReferenceSpace('viewer');
   const hitTestSource = await session.requestHitTestSource({space: viewerSpace});
+
+  // Handle user interactions (tap to place objects)
+  session.addEventListener("select", () => {
+    if (cat_statue && reticle.visible) {
+      const clone = cat_statue.clone();
+      clone.position.copy(reticle.position);
+      scene.add(clone);
+    }
+  });
 }
 </script>
 </body>
