@@ -49,6 +49,14 @@ async function activateXR() {
     context: gl
   });
   renderer.autoClear = false;
+
+  // Set up camera
+  const camera = new THREE.PerspectiveCamera();
+  camera.matrixAutoUpdate = false;
+
+  // Initialize WebXR session using "immersive-ar" with hit-test enabled
+  const session = await navigator.xr.requestSession("immersive-ar", {requiredFeatures: ['hit-test']});
+  session.updateRenderState({baseLayer: new XRWebGLLayer(session, gl)});
 }
 </script>
 </body>
