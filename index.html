@@ -28,6 +28,18 @@ async function activateXR() {
   const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
   directionalLight.position.set(10, 15, 10);
   scene.add(directionalLight);
+
+  // Load 3D Models (reticle and cat_statue)
+  const loader = new THREE.GLTFLoader();
+  let reticle, cat_statue;
+  loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/reticle/reticle.gltf", function(gltf) {
+    reticle = gltf.scene;
+    reticle.visible = false;
+    scene.add(reticle);
+  });
+  loader.load("https://drive.google.com/file/d/1tki4Pif9Kd5XEMOm-1klEiFr1tEchRb6/view?usp=sharing", function(gltf) {
+    cat_statue = gltf.scene;
+  });
 }
 </script>
 </body>
