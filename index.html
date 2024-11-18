@@ -57,6 +57,11 @@ async function activateXR() {
   // Initialize WebXR session using "immersive-ar" with hit-test enabled
   const session = await navigator.xr.requestSession("immersive-ar", {requiredFeatures: ['hit-test']});
   session.updateRenderState({baseLayer: new XRWebGLLayer(session, gl)});
+
+  // Set up reference spaces for positioning objects in AR environment
+  const referenceSpace = await session.requestReferenceSpace('local');
+  const viewerSpace = await session.requestReferenceSpace('viewer');
+  const hitTestSource = await session.requestHitTestSource({space: viewerSpace});
 }
 </script>
 </body>
